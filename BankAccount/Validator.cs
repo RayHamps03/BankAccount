@@ -10,11 +10,11 @@ namespace BankAccount
     {
         public bool IsWithinRange(double value, double min, double max)
         {
-            if (value <= min)
+            if (value >= min)
             {
                 return true;
             }
-            if (value > max)
+            if (value <= max)
             {
                 return true;
             }
