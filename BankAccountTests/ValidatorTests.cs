@@ -58,5 +58,47 @@ namespace BankAccount.Tests
             // Assert
             Assert.IsTrue(result);
         }
+
+        [TestMethod()]
+        public void IsWithinRange_ValueLessThanMinBoundary_ReturnFalse()
+        {
+            Validator validator = new();
+            double valueToCheck = 5;
+            double minBoundary = 6;
+            double maxBoundary = 100;
+
+            bool result = validator.IsWithinRange(valueToCheck, minBoundary, maxBoundary);
+
+            Assert.IsFalse(result);
+
+        }
+
+        [TestMethod()]
+        public void IsWithinRange_ValueGreaterThanMaxBoundary_ReturnsFalse()
+        {
+            Validator validator = new();
+            double valueToCheck = 1000.01;
+            double minBoundary = 0;
+            double maxBoundary = 1000;
+
+            bool result = validator.IsWithinRange(valueToCheck, minBoundary, maxBoundary);
+
+            Assert.IsFalse(result);
+
+
+        }
+
+        [TestMethod()]
+        public void IsWithinRange_MinBoundaryGreaterThanMaxBoundary_ThrowsArgumentException()
+        {
+            // Arrange
+            Validator  validator = new();
+            double minBoundary = 100;
+            double maxBoundary = 0;
+            double valueToCheck = 50;
+
+            // Assert- Act
+            Assert.ThrowsException<ArgumentException>(() => validator.IsWithinRange(valueToCheck, minBoundary, maxBoundary));
+        }
     }
 }
